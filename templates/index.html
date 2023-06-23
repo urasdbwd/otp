@@ -50,16 +50,21 @@ h1 {
         generateOtpButton.addEventListener('click', () => {
 		x = prompt('What is your secret key?')
 		y = x.replace(/\s/g,'')
-            fetch('/generate/' + y)
+    fetch('/generate/', {
+    method: 'POST', // or 'PUT'
+    body, JSON.stringify({
+      secret_key: y
+    }), // data can be `string` or {object}!
+    headers: {
+      'Content-Type': 'application/json',
+    }
+})
+            
                 .then(response => response.json())
                 //.then(data => console.log(data))
                 // pop up alert for data
                 .then(data => {
                     alert(data.otp)
-                   var a = document.createElement("a");
-					a.setAttribute("href", "/generate/" + y);
-					a.innerHTML = data.otp;
-					document.body.appendChild(a);
                 })
                 .catch(error => console.error(error))
         })
