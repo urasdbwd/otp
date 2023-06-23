@@ -1,9 +1,8 @@
 from flask import Flask, request, render_template, jsonify
 import pyotp
 from flask_cors import CORS
-CORS(app)
 app = Flask(__name__)
-
+CORS(app)
 # Generate a new random secret key
 # The secret key should be shared between the user and the server
 secret_key = pyotp.random_base32()
